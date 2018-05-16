@@ -1,8 +1,9 @@
 extern crate clap;
-extern crate chrono;
 
 use clap::{Arg, App};
-use chrono::Local;
+
+mod hello;
+mod time;
 
 fn main() {
     let matches = App::new("rodo")
@@ -16,16 +17,7 @@ fn main() {
     let module = matches.value_of("module").unwrap_or("hello");
 
     match module {
-        "time" => time(),
-        _ => hello(),
+        "time" => time::execute(),
+        _ => hello::execute()
     }
-}
-
-fn hello() {
-    println!("Hi, my name is rodo");
-}
-
-fn time() {
-    let now = Local::now();
-    println!("{}", now.format("%Y-%m-%d %H:%M:%S"));
 }
